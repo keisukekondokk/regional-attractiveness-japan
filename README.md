@@ -4,7 +4,7 @@
 
 ### Visualizing Regional Attractiveness Index
 
-This web app visualizes the regional attractiveness index, estimated from mobility data. The concept is proposed in Kondo (2023).
+This web app visualizes the regional attractiveness index, estimated from mobility data. The concept is proposed in Kondo (2023).  
 URL: https://keisuke-kondo.shinyapps.io/regional-attractiveness-japan/
 
 [![COVID19 in Tokyo](www/regional-attractiveness-japan.png "Regional Attractiveness Index")](https://keisuke-kondo.shinyapps.io/regional-attractiveness-japan/)
