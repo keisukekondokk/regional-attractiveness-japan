@@ -56,6 +56,10 @@ dashboardPage(
       "#panel_map {padding: 5px; background-color: #FFFFFF; opacity: 0.7;}
         #panel_map:hover {opacity: 1;}"
     ),
+    tags$style(
+      type = "text/css",
+      "body {overflow-y: scroll;}"
+    ),
     #++++++++++++++++++++++++++++++++++++++
     #Tab
     tabItems(
@@ -132,6 +136,10 @@ dashboardPage(
           style = "margin-top: -20px; margin-bottom: -10px;",
           column(
             width = 12,
+              div(style = "margin-top: 10px")
+          ),
+          column(
+            width = 6,
             selectInput(
               "listLineMuni1",
               width = "100%",
@@ -141,7 +149,7 @@ dashboardPage(
             ),
           ),
           column(
-            width = 12,
+            width = 6,
             selectInput(
               "listLineMuni2",
               width = "100%",
@@ -151,7 +159,7 @@ dashboardPage(
             ),          
           ),
           column(
-            width = 5,
+            width = 6,
             radioButtons(
               "listLineGender",
               width = "100%",
@@ -166,16 +174,16 @@ dashboardPage(
             ),
           ),
           column(
-            width = 7,
+            width = 6,
             radioButtons(
               "listLineAge",
               width = "100%",
               label = h4(span(icon("chart-line"), "Select Age Group:")),
               choices = list(
-                "Age Group：Total" = 0,
-                "Age Group：15-39" = 1,
-                "Age Group：40-59" = 2,
-                "Age Group：60-79" = 3
+                "Age：Total" = 0,
+                "Age：15-39" = 1,
+                "Age：40-59" = 2,
+                "Age：60-79" = 3
               ),
               selected = 0,
               inline = TRUE
@@ -183,7 +191,7 @@ dashboardPage(
           ),
           column(
             width = 12,
-            style = "margin-bottom: 10px; color: white;",
+            style = "margin-bottom: 20px; color: white;",
             actionButton(
               "buttonLineUpdate", 
               span(icon("play-circle"), "Update"), 
@@ -191,19 +199,18 @@ dashboardPage(
               width = "100%"
             )
           ),
-          div(),
           box(
             title = "Regional Attractiveness Index",
             width = 6,
-            highchartOutput("line1", height = "500px") %>%
+            highchartOutput("line1", height = "520px") %>%
               withSpinner(color = getOption("spinner.color", default = "#3C8EBC"))
           ),
           box(
             title = "Ratio of Regional Attractiveness Index",
             width = 6,
-            highchartOutput("line2", height = "500px") %>%
+            highchartOutput("line2", height = "520px") %>%
               withSpinner(color = getOption("spinner.color", default = "#3C8EBC"))
-          ),
+          )
         )
       ),
       #++++++++++++++++++++++++++++++++++++++
