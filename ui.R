@@ -12,7 +12,7 @@ dashboardPage(
   #++++++++++++++++++++++++++++++++++++++
   #Header
   dashboardHeader(
-    title = span(style = "font-size: 18px", "Regional Attractiveness Index"),
+    title = "Regional Attractiveness Index",
     titleWidth = 400,
     tags$li(
       actionLink(
