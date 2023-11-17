@@ -45,8 +45,8 @@ dashboardPage(
   #Body
   dashboardBody(
     tags$style(type = "text/css", "html, body {margin: 0; width: 100%; height: 100%}"),
-    tags$style(type = "text/css", "h2 {margin-top: 20px}"),
-    tags$style(type = "text/css", "h3, h4 {margin-top: 10px}"),
+    tags$style(type = "text/css", "h2 {margin-top: 10px}"),
+    tags$style(type = "text/css", "h3, h4 {margin-top: 5px}"),
     tags$style(
       type = "text/css",
       "#map1 {margin: 0; height: calc(100vh - 50px) !important;}"
@@ -84,7 +84,7 @@ dashboardPage(
               label = h4(span(icon("calendar"), "Select Day Type:")),
               choices = list(
                 "Weekday" = 1,
-                "Holiday" = 2
+                "Weekend/Holiday" = 2
               ),
               selected = 1,
               width = "100%"
@@ -108,10 +108,10 @@ dashboardPage(
               "listMapAge",
               label = h4(span(icon("users"), "Select Age Gruop:")),
               choices = list(
-                "Age Group：Total" = 0,
-                "Age Group：15-39" = 1,
-                "Age Group：40-59" = 2,
-                "Age Group：60-79" = 3
+                "Total" = 0,
+                "15-39" = 1,
+                "40-59" = 2,
+                "60 and over" = 3
               ),
               selected = 0,
               width = "100%"
@@ -123,7 +123,7 @@ dashboardPage(
                 width = "100%",
                 class = "btn btn-primary"
               )
-            ),
+            )
           ),
           leafletOutput("map1") %>%
             withSpinner(color = getOption("spinner.color", default = "#3C8EBC"))
@@ -143,20 +143,20 @@ dashboardPage(
             selectInput(
               "listLineMuni1",
               width = "100%",
-              label = h4(span(icon("chart-line"), "Select Municipality for Baseline (Dashed Line)")),
+              label = h4(span(icon("chart-line"), "Select Municipality for Baseline (Solid Line)")),
               choices = listMuni,
-              selected = "27104 大阪府 大阪市此花区"
-            ),
+              selected = "28110 兵庫県 神戸市中央区"
+            )
           ),
           column(
             width = 6,
             selectInput(
               "listLineMuni2",
               width = "100%",
-              label = h4(span(icon("chart-line"), "Select Municipality for Comparison (Solid Line)")),
+              label = h4(span(icon("chart-line"), "Select Municipality for Comparison (Dashed Line)")),
               choices = listMuni,
-              selected = "28110 兵庫県 神戸市中央区"
-            ),          
+              selected = "27104 大阪府 大阪市此花区"
+            )
           ),
           column(
             width = 6,
@@ -171,7 +171,7 @@ dashboardPage(
               ),
               selected = 0,
               inline = TRUE
-            ),
+            )
           ),
           column(
             width = 6,
@@ -180,14 +180,14 @@ dashboardPage(
               width = "100%",
               label = h4(span(icon("chart-line"), "Select Age Group:")),
               choices = list(
-                "Age：Total" = 0,
-                "Age：15-39" = 1,
-                "Age：40-59" = 2,
-                "Age：60-79" = 3
+                "Total" = 0,
+                "15-39" = 1,
+                "40-59" = 2,
+                "60 and over" = 3
               ),
               selected = 0,
               inline = TRUE
-            ),
+            )
           ),
           column(
             width = 12,
@@ -201,14 +201,8 @@ dashboardPage(
           ),
           box(
             title = "Regional Attractiveness Index",
-            width = 6,
+            width = 12,
             highchartOutput("line1", height = "520px") %>%
-              withSpinner(color = getOption("spinner.color", default = "#3C8EBC"))
-          ),
-          box(
-            title = "Ratio of Regional Attractiveness Index",
-            width = 6,
-            highchartOutput("line2", height = "520px") %>%
               withSpinner(color = getOption("spinner.color", default = "#3C8EBC"))
           )
         )

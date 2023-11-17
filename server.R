@@ -223,7 +223,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -248,7 +248,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -274,7 +274,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -300,7 +300,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -326,7 +326,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -351,7 +351,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -377,7 +377,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -403,7 +403,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -429,7 +429,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -455,7 +455,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -482,7 +482,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -509,7 +509,7 @@ server <- function(input, output) {
           palette = "-Oranges",
           n = 9,
           style = "fixed",
-          breaks = c(-4.5, -3.5, -2.5, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.50),
+          breaks = c(-7.0, -3.5, -2.5, -2.25, -2.0, -1.75, -1.5, -1.25, -1.0, -0.75),
           id = "muni_name",
           popup.vars = c(
             "Prefecture Code: " = "pref_code",
@@ -566,14 +566,14 @@ server <- function(input, output) {
   
   
   #++++++++++++++++++++++++++++++++++++++
-  #Time-Series: line1, line2
+  #Time-Series: line1
   observeEvent(input$buttonLineUpdate, {
    
     #Municipality Code
     inputListLineMuni1 <- as.numeric(strsplit(input$listLineMuni1, " ")[[1]][1])
     inputListLineMuni2 <- as.numeric(strsplit(input$listLineMuni2, " ")[[1]][1])
     
-    #DataFrame Base1
+    #DataFrame Base Day1
     dfDeltaLineDay1Base <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni1 &
@@ -585,7 +585,7 @@ server <- function(input, output) {
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d", tz = "Asia/Tokyo"))
     
-    #DataFrame Base1
+    #DataFrame Base Day2
     dfDeltaLineDay2Base <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni1 &
@@ -596,13 +596,8 @@ server <- function(input, output) {
       dplyr::left_join(dfMuni, by = c("code_pref_muni" = "muni_code")) %>%
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d"))
-    
-    #DataFrame Base Day1/2
-    dfDeltaLineDayBaseRatio <- dfDeltaLineDay1Base %>%
-      dplyr::left_join(dfDeltaLineDay2Base, by = "ts") %>%
-      dplyr::mutate(ratio_b_delta_total = b_delta_total.y / b_delta_total.x)
 
-    #DataFrame Comparison
+    #DataFrame Comparison Day1
     dfDeltaLineDay1Comp <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni2 &
@@ -614,7 +609,7 @@ server <- function(input, output) {
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d", tz = "Asia/Tokyo"))
     
-    #DataFrame Comparison
+    #DataFrame Comparison Day2
     dfDeltaLineDay2Comp <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni2 &
@@ -625,11 +620,6 @@ server <- function(input, output) {
       dplyr::left_join(dfMuni, by = c("code_pref_muni" = "muni_code")) %>%
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d"))
-    
-    #DataFrame Comparison Day1/2
-    dfDeltaLineDayCompRatio <- dfDeltaLineDay1Comp %>%
-      dplyr::left_join(dfDeltaLineDay2Comp, by = "ts") %>%
-      dplyr::mutate(ratio_b_delta_total = b_delta_total.y / b_delta_total.x)
 
     #Highcharts: Value
     output$line1 <- renderHighchart({
@@ -641,9 +631,8 @@ server <- function(input, output) {
           type = "line",
           color = "#2F7ED8",
           lineWidth = 2,
-          name = paste0(dfDeltaLineDayBaseRatio$muni_name.x[1], " (Weekday)"),
-          showInLegend = TRUE,
-          dashStyle = "longdash"
+          name = paste0(dfDeltaLineDay1Base$muni_name[1], " (Weekday)"),
+          showInLegend = TRUE
         ) %>%
         hc_add_series(
           data = dfDeltaLineDay2Base,
@@ -651,9 +640,8 @@ server <- function(input, output) {
           type = "line",
           color = "#CD5C5C",
           lineWidth = 2,
-          name = paste0(dfDeltaLineDayBaseRatio$muni_name.x[1], " (Holiday)"),
-          showInLegend = TRUE,
-          dashStyle = "longdash"
+          name = paste0(dfDeltaLineDay2Base$muni_name[1], " (Weekend/Holiday)"),
+          showInLegend = TRUE
         ) %>%
         hc_add_series(
           data = dfDeltaLineDay1Comp,
@@ -661,8 +649,9 @@ server <- function(input, output) {
           type = "line",
           color = "#2F7ED8",
           lineWidth = 2,
-          name = paste0(dfDeltaLineDayCompRatio$muni_name.x[1], " (Weekday)"),
-          showInLegend = TRUE
+          name = paste0(dfDeltaLineDay1Comp$muni_name[1], " (Weekday)"),
+          showInLegend = TRUE,
+          dashStyle = "longdash"
         ) %>%
         hc_add_series(
           data = dfDeltaLineDay2Comp,
@@ -670,8 +659,9 @@ server <- function(input, output) {
           type = "line",
           color = "#CD5C5C",
           lineWidth = 2,
-          name = paste0(dfDeltaLineDayCompRatio$muni_name.x[1], " (Holiday)"),
-          showInLegend = TRUE
+          name = paste0(dfDeltaLineDay2Comp$muni_name[1], " (Weekend/Holiday)"),
+          showInLegend = TRUE,
+          dashStyle = "longdash"
         ) %>%
         hc_yAxis(
           title = list(text = "Regional Attractiveness Index"),
@@ -689,56 +679,6 @@ server <- function(input, output) {
       
       #plot
       hc1
-      
-    })
-    
-    #Highcharts: Ratio
-    output$line2 <- renderHighchart({
-      
-      hc2 <- highchart() %>%
-        hc_add_series(
-          data = dfDeltaLineDayBaseRatio,
-          hcaes(x = ts, y = ratio_b_delta_total),
-          type = "line",
-          color = "#25B086",
-          lineWidth = 2,
-          name = paste0(dfDeltaLineDayBaseRatio$muni_name.x[1]),
-          showInLegend = TRUE,
-          dashStyle = "longdash",
-          zindex = 1,
-        ) %>%
-        hc_add_series(
-          data = dfDeltaLineDayCompRatio,
-          hcaes(x = ts, y = ratio_b_delta_total),
-          type = "line",
-          color = "#25B086",
-          lineWidth = 2,
-          name = paste0(dfDeltaLineDayCompRatio$muni_name.x[1]),
-          showInLegend = TRUE,
-          zindex = 1,
-        ) %>%
-        hc_yAxis(
-          title = list(text = "Weekday-Holiday Ratio of Regional Attractiveness Index"),
-          allowDecimals = TRUE,
-          plotLines = list(list(
-            value = 1,
-            color = '#ff0000',
-            width = 2,
-            zIndex = -10
-          ))
-        ) %>%
-        hc_xAxis(
-          type = "datetime", 
-          showLastLabel = TRUE,
-          dateTimeLabelFormats = list(day = "%d", month = "%b-%Y")
-        ) %>%
-        hc_tooltip(valueDecimals = 4,
-                   pointFormat = "Municipality: {point.series.name} <br> Delta: {point.y}") %>%
-        hc_add_theme(hc_theme_flat()) %>%
-        hc_credits(enabled = TRUE)
-      
-      #plot
-      hc2
       
     })
     
