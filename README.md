@@ -1,52 +1,49 @@
-# Regional Attractiveness Index
+# 地域魅力度指数可視化システム
 
 ## Shiny Web App
 
-### Visualizing Regional Attractiveness Index
+### 地域魅力度指数
 
-This web app visualizes the regional attractiveness index, estimated from mobility data. The concept is proposed in Kondo (2023).  
+Kondo (2023)において提案した人流データから推定する地域魅力度指数を可視化しています。  
 URL: https://keisuke-kondo.shinyapps.io/regional-attractiveness-japan/
 
 [![COVID19 in Tokyo](www/regional-attractiveness-japan.png "Regional Attractiveness Index")](https://keisuke-kondo.shinyapps.io/regional-attractiveness-japan/)
 
-### Reference
+### 参考文献
 Kondo, K. (2023) "Measuring the Attractiveness of Trip Destinations: A Study of the Kansai Region," RIEB Discussion Paper Series No.2023-07  
 URL: https://www.rieb.kobe-u.ac.jp/academic/ra/dp/English/dp2023-07.html
 
-## Terms of Use
-Users (hereinafter referred to as the User or Users depending on context) of the content on this web site (hereinafter referred to as the Content) are required to conform to the terms of use described herein (hereinafter referred to as the Terms of Use). Furthermore, use of the Content constitutes agreement by the User with the Terms of Use. The content of the Terms of Use is subject to change without prior notice.
+## 利用規約
+当サイトで公開している情報（以下「コンテンツ」）は、どなたでも自由に利用できます。コンテンツ利用に当たっては、本利用規約に同意したものとみなします。本利用規約の内容は、必要に応じて事前の予告なしに変更されることがありますので、必ず最新の利用規約の内容をご確認ください。
 
-### Copyright
-The copyright of the developed code belongs to Keisuke Kondo.
+### 著作権
+本コンテンツの著作権は、近藤恵介に帰属します。
 
-### Copyright of Third Parties
-Keisuke Kondo developed the Content based on the information on From-To Analysis on the Regional Economy and Society Analyzing System (RESAS), which is freely available using the RESAS API. The original data of From-To Analysis is based on Mobile Spatial Statistics® of NTT DOCOMO. The shapefiles were taken from the Portal Site of Official Statistics of Japan, e-Stat. Users must confirm the terms of use of the RESAS and the e-Stat, prior to using the Content.
+### 第三者の権利
+本コンテンツは、「From-To分析（滞在人口）」（RESAS）および「統計地理情報システム」（e-Stat）の情報に基づいて作成しています。「From-To分析（滞在人口）」は「モバイル空間統計®」（NTTドコモ）に基づいたデータであり、RESAS APIを利用して2015年9月から2016年8月までの期間をダウンロードして使用しています。本コンテンツを利用する際は、第三者の権利を侵害しないようにしてください。
 
-### Licence
-The developed code is released under the MIT License.
-
-### Disclaimer
+### 免責事項
 <ul>
-<li>Keisuke Kondo makes the utmost effort to maintain, but nevertheless does not guarantee, the accuracy, completeness, integrity, usability, and recency of the Content.</li>
-<li>Keisuke Kondo and any organization to which Keisuke Kondo belongs hereby disclaim responsibility and liability for any loss or damage that may be incurred by Users as a result of using the Content. Keisuke Kondo and any organization to which Keisuke Kondo belongs are neither responsible nor liable for any loss or damage that a User of the Content may cause to any third party as a result of using the Content</li>
-<li>The Content may be modified, moved or deleted without prior notice.</li>
+<li>作成にあたり細心の注意を払っていますが、本サイトの内容の完全性・正確性・有用性等についていかなる保証を行うものでありません。</li>
+<li>本サイトを利用したことによるすべての障害・損害・不具合等、作成者および作成者の所属するいかなる団体・組織とも、一切の責任を負いません。</li>
+<li>本サイトは、事前の予告なく変更、移転、削除等が行われることがあります。</li>
 </ul>
 
-## Data Sources
+## 使用データ出所
 
-### From-To Analysis (RESAS API)
+### From-To分析（滞在人口）： RESAS API
 URL: https://opendata.resas-portal.go.jp/docs/api/v1/partner/docomo/destination.html
 
-### Shapefile of Japanese Prefectures (e-Stat, Portal Site of Official Statistics of Japan)
+### 都道府県・市区町村シェープファイル：統計地理情報システム（e-Stat）
 URL: https://www.e-stat.go.jp/
 
-## Author
-Keisuke Kondo  
-Senior Fellow, Research Institute of Economy, Trade and Industry (RIETI)  
-Associate Professor, Research Institute for Economics and Business Administration (RIEB), Kobe University  
-Email: kondo-keisuke@rieti.go.jp  
+## 作成者
+近藤恵介  
+独立行政法人経済産業研究所・上席研究員  
+神戸大学経済経営研究所・准教授  
 URL: https://keisukekondokk.github.io/  
 
-## Update History
+## 更新履歴
 
-November 10, 2023, Uploaded on GitHub
+2024年1月2日：対象地域を全国に拡張し日本語版へ移行  
+2023年11月10日：GitHubに関西圏限定版を英語公開  

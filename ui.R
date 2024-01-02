@@ -1,6 +1,7 @@
 # 
 # (C) Keisuke Kondo
 # Release Date: 2023-11-10
+# Updated Date: 2024-01-02
 # 
 # - global.R
 # - ui.R
@@ -12,7 +13,7 @@ dashboardPage(
   #++++++++++++++++++++++++++++++++++++++
   #Header
   dashboardHeader(
-    title = "Regional Attractiveness Index",
+    title = "地域魅力度指数可視化システム",
     titleWidth = 400,
     tags$li(
       actionLink(
@@ -53,7 +54,7 @@ dashboardPage(
     ),
     tags$style(
       type = "text/css",
-      "#panel_map {padding: 5px; background-color: #FFFFFF; opacity: 0.7;}
+      "#panel_map {padding: 5px; background-color: #FFFFFF; opacity: 0.8;}
         #panel_map:hover {opacity: 1;}"
     ),
     tags$style(
@@ -79,12 +80,24 @@ dashboardPage(
             height = "auto",
             draggable = TRUE,
             style = "z-index:10;",
+            airDatepickerInput(
+              "listMapDate",
+              label = h4(span(icon("calendar"), "年月の選択：")),
+              value = "2016-08-01",
+              min = "2015-09-01",
+              max = "2016-08-01",
+              view = "months",
+              minView = "months",
+              dateFormat = "yyyy-MM",
+              autoClose = TRUE,
+              language = "ja"
+            ),
             radioButtons(
               "listMapDay",
-              label = h4(span(icon("calendar"), "Select Day Type:")),
+              label = h4(span(icon("business-time"), "平日・休日の選択")),
               choices = list(
-                "Weekday" = 1,
-                "Weekend/Holiday" = 2
+                "平日" = 1,
+                "休日" = 2
               ),
               selected = 1,
               width = "100%"
@@ -93,12 +106,12 @@ dashboardPage(
             radioButtons(
               "listMapGender",
               label = h4(span(
-                icon("user"), "Select Gender Type:"
+                icon("user"), "性別の選択："
               )),
               choices = list(
-                "Total" = 0,
-                "Male" = 1,
-                "Female" = 2
+                "全体" = 0,
+                "男性" = 1,
+                "女性" = 2
               ),
               selected = 0,
               width = "100%"
@@ -106,12 +119,12 @@ dashboardPage(
             # Slider bar for Infectious State
             radioButtons(
               "listMapAge",
-              label = h4(span(icon("users"), "Select Age Gruop:")),
+              label = h4(span(icon("users"), "年齢層の選択：")),
               choices = list(
-                "Total" = 0,
-                "15-39" = 1,
-                "40-59" = 2,
-                "60 and over" = 3
+                "全体" = 0,
+                "15-39歳" = 1,
+                "40-59歳" = 2,
+                "60歳以上" = 3
               ),
               selected = 0,
               width = "100%"
@@ -119,10 +132,11 @@ dashboardPage(
             div(
               actionButton(
                 inputId = "buttonMapUpdate", 
-                label = span(icon("play-circle"), "Update"), 
+                label = span(icon("play-circle"), "更新"), 
                 width = "100%",
                 class = "btn btn-primary"
-              )
+              ),
+              p("※更新が反映されるまで少し時間がかかります。")
             )
           ),
           leafletOutput("map1") %>%
@@ -140,34 +154,36 @@ dashboardPage(
           ),
           column(
             width = 6,
-            selectInput(
+            selectizeInput (
               "listLineMuni1",
               width = "100%",
-              label = h4(span(icon("chart-line"), "Select Municipality for Baseline (Solid Line)")),
+              label = h4(span(icon("chart-line"), "市区町村１の選択（実線）")),
               choices = listMuni,
-              selected = "28110 兵庫県 神戸市中央区"
+              selected = "47201 沖縄県 那覇市",
+              options= list(maxOptions = 2000)
             )
           ),
           column(
             width = 6,
-            selectInput(
+            selectizeInput(
               "listLineMuni2",
               width = "100%",
-              label = h4(span(icon("chart-line"), "Select Municipality for Comparison (Dashed Line)")),
+              label = h4(span(icon("chart-line"), "市区町村２の選択（破線）")),
               choices = listMuni,
-              selected = "27104 大阪府 大阪市此花区"
-            )
+              selected = "13101 東京都 千代田区",
+              options= list(maxOptions = 2000)
+            )   
           ),
           column(
             width = 6,
             radioButtons(
               "listLineGender",
               width = "100%",
-              label = h4(span(icon("chart-line"), "Select Gender Type:")),
+              label = h4(span(icon("chart-line"), "性別の選択：")),
               choices = list(
-                "Total" = 0,
-                "Male" = 1,
-                "Female" = 2
+                "全体" = 0,
+                "男性" = 1,
+                "女性" = 2
               ),
               selected = 0,
               inline = TRUE
@@ -178,12 +194,12 @@ dashboardPage(
             radioButtons(
               "listLineAge",
               width = "100%",
-              label = h4(span(icon("chart-line"), "Select Age Group:")),
+              label = h4(span(icon("chart-line"), "年齢層の選択：")),
               choices = list(
-                "Total" = 0,
-                "15-39" = 1,
-                "40-59" = 2,
-                "60 and over" = 3
+                "全体" = 0,
+                "15-39歳" = 1,
+                "40-59歳" = 2,
+                "60歳以上" = 3
               ),
               selected = 0,
               inline = TRUE
@@ -194,13 +210,12 @@ dashboardPage(
             style = "margin-bottom: 20px; color: white;",
             actionButton(
               "buttonLineUpdate", 
-              span(icon("play-circle"), "Update"), 
+              span(icon("play-circle"), "更新"), 
               class = "btn btn-primary",
               width = "100%"
             )
           ),
           box(
-            title = "Regional Attractiveness Index",
             width = 12,
             highchartOutput("line1", height = "520px") %>%
               withSpinner(color = getOption("spinner.color", default = "#3C8EBC"))
@@ -220,34 +235,34 @@ dashboardPage(
               solidHeader = TRUE,
               p("Release Date: November 10, 2023", align = "right"),
               #------------------------------------------------------------------
-              h3(style = "border-bottom: solid 1px black;", span(icon("fas fa-pen-square"), "Introduction")),
-              p("This web app visualizes the regional attractiveness index, estimated from mobility data. The concept is proposed in Kondo (2023)."),
+              h3(style = "border-bottom: solid 1px black;", span(icon("fas fa-pen-square"), "はじめに")),
+              p("Kondo (2023)において提案した人流データから推定する地域魅力度指数を可視化しています。"),
               #------------------------------------------------------------------
-              h3(style = "border-bottom: solid 1px black;", span(icon("user-circle"), "Author")),
-              p("Keisuke Kondo"),
-              p("Senior Fellow, Research Institute of Economy, Trade and Industry (RIETI)"),
-              p("Associate Professor, Research Institute for Economics and Business Administration (RIEB), Kobe University"),
-              h3(style = "border-bottom: solid 1px black;", span(icon("envelope-open"), "Contact")),
+              h3(style = "border-bottom: solid 1px black;", span(icon("user-circle"), "作成者")),
+              p("近藤恵介"),
+              p("独立行政法人経済産業研究所・上席研究員"),
+              p("神戸大学経済経営研究所・准教授"),
+              #------------------------------------------------------------------
+              h3(style = "border-bottom: solid 1px black;", span(icon("envelope-open"), "連絡先")),
               p("Email: kondo-keisuke@rieti.go.jp"),
-              h3(style = "border-bottom: solid 1px black;", span(icon("fas fa-file-alt"), "Terms of Use")),
-              p(
-                "Users (hereinafter referred to as the User or Users depending on context) of the content on this web site (hereinafter referred to as the Content) are required to conform to the terms of use described herein (hereinafter referred to as the Terms of Use). Furthermore, use of the Content constitutes agreement by the User with the Terms of Use. The content of the Terms of Use is subject to change without prior notice."
-              ),
-              h4("Copyright"),
-              p("The copyright of the developed code belongs to Keisuke Kondo."),
-              h4("Copyright of Third Parties"),
-              p(
-                "Keisuke Kondo developed the Content based on the information on From-To Analysis on the Regional Economy and Society Analyzing System (RESAS), which is freely available using the RESAS API. The original data of From-To Analysis is based on Mobile Spatial Statistics® of NTT DOCOMO. The shapefiles were taken from the Portal Site of Official Statistics of Japan, e-Stat. Users must confirm the terms of use of the RESAS and the e-Stat, prior to using the Content."
-              ),
-              h4("Licence"),
-              p("The developed code is released under the MIT License."),
-              h4("Disclaimer"),
-              p("(a) Keisuke Kondo makes the utmost effort to maintain, but nevertheless does not guarantee, the accuracy, completeness, integrity, usability, and recency of the Content."),
-              p("(b) Keisuke Kondo and any organization to which Keisuke Kondo belongs hereby disclaim responsibility and liability for any loss or damage that may be incurred by Users as a result of using the Content. Keisuke Kondo and any organization to which Keisuke Kondo belongs are neither responsible nor liable for any loss or damage that a User of the Content may cause to any third party as a result of using the Content"),
-              p("(c) The Content may be modified, moved or deleted without prior notice."),
               #------------------------------------------------------------------
-              h3(style = "border-bottom: solid 1px black;", span(icon("database"), "Data Sources")),
-              h4("From-To Analysis: RESAS API"),
+              h3(style = "border-bottom: solid 1px black;", span(icon("fas fa-file-alt"), "利用規約")),
+              p(
+                "当サイトで公開している情報（以下「コンテンツ」）は、どなたでも自由に利用できます。コンテンツ利用に当たっては、本利用規約に同意したものとみなします。本利用規約の内容は、必要に応じて事前の予告なしに変更されることがありますので、必ず最新の利用規約の内容をご確認ください。"
+              ),
+              h4("著作権"),
+              p("本コンテンツの著作権は、近藤恵介に帰属します。"),
+              h4("第三者の権利"),
+              p(
+                "本コンテンツは、「From-To分析（滞在人口）」（RESAS）および「統計地理情報システム」（e-Stat）の情報に基づいて作成しています。「From-To分析（滞在人口）」は「モバイル空間統計®」（NTTドコモ）に基づいたデータであり、RESAS APIを利用して2015年9月から2016年8月までの期間をダウンロードして使用しています。本コンテンツを利用する際は、第三者の権利を侵害しないようにしてください。"
+              ),
+              h4("免責事項"),
+              p("(a) 作成にあたり細心の注意を払っていますが、本サイトの内容の完全性・正確性・有用性等についていかなる保証を行うものでありません。"),
+              p("(b) 本サイトを利用したことによるすべての障害・損害・不具合等、作成者および作成者の所属するいかなる団体・組織とも、一切の責任を負いません。"),
+              p("(c) 本サイトは、事前の予告なく変更、移転、削除等が行われることがあります。"),
+              #------------------------------------------------------------------
+              h3(style = "border-bottom: solid 1px black;", span(icon("database"), "データ出所")),
+              h4("From-to分析（滞在人口）：RESAS API"),
               p(
                 "URL: ",
                 a(
@@ -257,7 +272,7 @@ dashboardPage(
                 ),
                 .noWS = c("after-begin", "before-end")
               ), 
-              h4("Shapefile of Japanese Prefectures: e-Stat, Portal Site of Official Statistics of Japan"),
+              h4("都道府県・市区町村シェープファイル：統計地理情報システム（e-Stat）"),
               p(
                 "URL: ",
                 a(
@@ -268,9 +283,9 @@ dashboardPage(
                 .noWS = c("after-begin", "before-end")
               ),
               #------------------------------------------------------------------
-              h3(style = "border-bottom: solid 1px black;", span(icon("book"), "Reference")),
+              h3(style = "border-bottom: solid 1px black;", span(icon("book"), "参考文献")),
               p(
-                "Kondo, Keisuke (2023) Measuring the Attractiveness of Trip Destinations: A Study of the Kansai Region, RIEB Discussion Paper Series No.2023-07"
+                "Kondo, Keisuke (2023) Measuring the Attractiveness of Trip Destinations: A Study of the Kansai Region of Japan, RIEB Discussion Paper Series No.2023-07"
               ),
               p(
                 "URL: ",
