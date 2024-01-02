@@ -47,7 +47,7 @@ dashboardPage(
   dashboardBody(
     tags$style(type = "text/css", "html, body {margin: 0; width: 100%; height: 100%}"),
     tags$style(type = "text/css", "h2 {margin-top: 10px}"),
-    tags$style(type = "text/css", "h3, h4 {margin-top: 5px}"),
+    tags$style(type = "text/css", "h3, h4 {margin-top: 10px}"),
     tags$style(
       type = "text/css",
       "#map1 {margin: 0; height: calc(100vh - 50px) !important;}"
@@ -233,7 +233,6 @@ dashboardPage(
               width = NULL,
               title = h2(span(icon("info-circle"), "Readme")),
               solidHeader = TRUE,
-              p("Release Date: November 10, 2023", align = "right"),
               #------------------------------------------------------------------
               h3(style = "border-bottom: solid 1px black;", span(icon("fas fa-pen-square"), "はじめに")),
               p("Kondo (2023)において提案した人流データから推定する地域魅力度指数を可視化しています。"),
@@ -295,7 +294,11 @@ dashboardPage(
                   .noWS = "outside"
                 ),
                 .noWS = c("after-begin", "before-end")
-              )
+              ),
+              #------------------------------------------------------------------
+              h3(style = "border-bottom: solid 1px black;", span(icon("calendar"), "更新履歴")),
+              p("2024年1月2日：対象地域を全国に拡張し日本語版へ移行"),
+              p("2023年11月10日：GitHubに関西圏限定版を英語公開")
             )
           )
         )
