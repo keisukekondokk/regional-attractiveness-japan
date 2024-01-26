@@ -73,7 +73,7 @@ server <- function(input, output, session) {
     sfPolyLegend <- sfMuni %>%
       dplyr::left_join(dfDeltaMap, by = c( "cityCode" = "code_pref_muni" )) %>%
       dplyr::select(prefCode, prefName, cityCode, cityName, starts_with("b_delta"), pseudo_r2, obs_nonzero) %>%
-      dplyr::mutate(share_nonzero = 100 * obs_nonzero / nrow(dfDeltaMap)) %>%
+      dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaMap) - 1) ) %>%
       dplyr::mutate(b_delta_total = if_else(b_delta_total > 0, NA_real_, b_delta_total)) %>%
       dplyr::mutate(b_delta_color_group = cut(b_delta_total, breaks = breaks, labels = breaks_label)) %>%
       dplyr::mutate(b_delta_color_group = as.character(b_delta_color_group)) %>%
@@ -186,7 +186,7 @@ server <- function(input, output, session) {
     sfPolyLegend <- sfMuni %>%
       dplyr::left_join(dfDeltaMap, by = c( "cityCode" = "code_pref_muni" )) %>%
       dplyr::select(prefCode, prefName, cityCode, cityName, starts_with("b_delta"), pseudo_r2, obs_nonzero) %>%
-      dplyr::mutate(share_nonzero = 100 * obs_nonzero / nrow(dfDeltaMap)) %>%
+      dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaMap) - 1) ) %>%
       dplyr::mutate(b_delta_total = if_else(b_delta_total > 0, NA_real_, b_delta_total)) %>%
       dplyr::mutate(b_delta_color_group = cut(b_delta_total, breaks = breaks, labels = breaks_label)) %>%
       dplyr::mutate(b_delta_color_group = as.character(b_delta_color_group)) %>%
@@ -248,53 +248,61 @@ server <- function(input, output, session) {
     inputListLineMuni2 <- as.numeric(strsplit(input$listLineMuni2, " ")[[1]][1])
     
     #DataFrame Base Day1
-    dfDeltaLineDay1Base <- dfDelta %>%
+    dfDeltaTemp <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni1 &
           day == 1 &
           gender == input$listLineGender & 
           age_group == input$listLineAge
-      ) %>%
+      ) 
+    dfDeltaLineDay1Base <- dfDeltaTemp %>%
       dplyr::left_join(dfMuni, by = c("code_pref_muni" = "cityCode")) %>%
+      dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaTemp) - 1)) %>%
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d", tz = "Asia/Tokyo"))
     
     #DataFrame Base Day2
-    dfDeltaLineDay2Base <- dfDelta %>%
+    dfDeltaTemp <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni1 &
           day == 2 &
           gender == input$listLineGender & 
           age_group == input$listLineAge
-      ) %>%
+      ) 
+    dfDeltaLineDay2Base <- dfDeltaTemp %>%
       dplyr::left_join(dfMuni, by = c("code_pref_muni" = "cityCode")) %>%
+      dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaTemp) - 1)) %>%
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d"))
 
     #DataFrame Comparison Day1
-    dfDeltaLineDay1Comp <- dfDelta %>%
+    dfDeltaTemp <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni2 &
           day == 1 &
           gender == input$listLineGender & 
           age_group == input$listLineAge
-      ) %>%
+      ) 
+    dfDeltaLineDay1Comp <- dfDeltaTemp %>%
       dplyr::left_join(dfMuni, by = c("code_pref_muni" = "cityCode")) %>%
+      dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaTemp) - 1)) %>%
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d", tz = "Asia/Tokyo"))
     
     #DataFrame Comparison Day2
-    dfDeltaLineDay2Comp <- dfDelta %>%
+    dfDeltaTemp <- dfDelta %>%
       dplyr::filter(
         code_pref_muni == inputListLineMuni2 &
           day == 2 &
           gender == input$listLineGender & 
           age_group == input$listLineAge
-      ) %>%
+      ) 
+    dfDeltaLineDay2Comp <-dfDeltaTemp %>%
       dplyr::left_join(dfMuni, by = c("code_pref_muni" = "cityCode")) %>%
+      dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaTemp) - 1)) %>%
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d"))
-
+      
     #Highcharts: Value
     output$line1 <- renderHighchart({
     
@@ -356,6 +364,51 @@ server <- function(input, output, session) {
       
     })
     
+  }, ignoreNULL = FALSE)
+  
+  
+  
+  #++++++++++++++++++++++++++++++++++++++
+  #Ranking: Table1
+  #++++++++++++++++++++++++++++++++++++++
+  
+  observeEvent(input$buttonTableUpdate, {
+
+    #DataFrame: Filter by
+    dfDeltaTable <- dfDelta %>%
+      dplyr::filter(
+        year == lubridate::year(input$listTableDate) &
+        month == lubridate::month(input$listTableDate) &
+        day == input$listTableDay &
+        gender == input$listTableGender & 
+        age_group == input$listTableAge
+      )
+  
+    #DataTable
+    dfDeltaTable <- dfDeltaTable %>%
+      dplyr::left_join(dfMuni %>% select(prefCode, prefName) %>% distinct(), by = c("code_pref" = "prefCode")) %>%
+      dplyr::left_join(dfMuni %>% select(cityCode, cityName), by = c("code_pref_muni" = "cityCode")) %>%
+      dplyr::mutate(share_nonzero = obs_nonzero / (nrow(dfDeltaTable) - 1)) %>%
+      dplyr::select(code_pref_muni, prefName, cityName, starts_with("b_delta_total") , share_nonzero) %>%
+      dplyr::arrange(desc(b_delta_total), desc(share_nonzero)) %>%
+      dplyr::rename(`市区町村コード` = code_pref_muni) %>%
+      dplyr::rename(`都道府県名` = prefName) %>%
+      dplyr::rename(`市区町村名` = cityName) %>%
+      dplyr::rename(`地域魅力度指数` = b_delta_total) %>%
+      dplyr::rename(`非ゼロフロー割合` = share_nonzero)    
+
+    #DataTable
+    output$tableDeltaTop <- renderDataTable({
+      DT::datatable(dfDeltaTable) %>%
+        DT::formatRound(columns = c(4:5), digits = 3) %>%
+        DT::formatPercentage(columns = 5, digits = 3)
+    }, 
+      options = list(
+        autoWidth = TRUE, 
+        scrollX = TRUE
+      )
+    )
+ 
   }, ignoreNULL = FALSE)
   
 }

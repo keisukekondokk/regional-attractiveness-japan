@@ -29,6 +29,7 @@ if(!require(leaflet.mapboxgl)) install.packages("leaflet.mapboxgl")
 if(!require(sf)) install.packages("sf")
 if(!require(tidyverse)) install.packages("tidyverse")
 if(!require(haven)) install.packages("haven")
+if(!require(DT)) install.packages("DT")
 if(!require(highcharter)) install.packages("highcharter")
 
 #市区町村リスト
@@ -39,6 +40,11 @@ dfMuni <- dfMuni %>%
 
 #市区町村リスト
 listMuni <- as.list(paste(dfMuni$cityCode, dfMuni$prefName, dfMuni$cityName))
+
+#都道府県リスト
+dfPref <- dfMuni %>%
+  dplyr::distinct(prefCode, prefName)
+listPref <- as.list(paste(dfPref$prefCode, dfPref$prefName))
 
 #シェープファイル(市町村単位)
 sfMuni <- sf::read_sf("data/shp_polygon/shp_poly_pc2015_muni.geojson") 
