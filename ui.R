@@ -14,7 +14,7 @@ dashboardPage(
   #Header
   dashboardHeader(
     title = "地域魅力度指数可視化システム",
-    titleWidth = 400,
+    titleWidth = 350,
     tags$li(
       actionLink(
         "github",
@@ -88,14 +88,14 @@ dashboardPage(
             bottom = "auto",
             left = "auto",
             right = "auto",
-            width = 200,
+            width = 150,
             height = "auto",
             draggable = TRUE,
             style = "z-index:10;",
             #選択
             airDatepickerInput(
               "listMapDate",
-              label = h4(span(icon("calendar"), "年月の選択：")),
+              label = h5(span(icon("calendar"), "年月の選択：")),
               value = "2016-08-01",
               min = "2015-09-01",
               max = "2016-08-01",
@@ -108,7 +108,7 @@ dashboardPage(
             #選択
             radioButtons(
               "listMapDay",
-              label = h4(span(icon("business-time"), "平日・休日の選択")),
+              label = h5(span(icon("business-time"), "平日・休日の選択")),
               choices = list(
                 "平日" = 1,
                 "休日" = 2
@@ -119,7 +119,7 @@ dashboardPage(
             #選択
             radioButtons(
               "listMapGender",
-              label = h4(span(
+              label = h5(span(
                 icon("user"), "性別の選択："
               )),
               choices = list(
@@ -133,7 +133,7 @@ dashboardPage(
             #選択
             radioButtons(
               "listMapAge",
-              label = h4(span(icon("users"), "年齢層の選択：")),
+              label = h5(span(icon("users"), "年齢層の選択：")),
               choices = list(
                 "全体" = 0,
                 "15-39歳" = 1,

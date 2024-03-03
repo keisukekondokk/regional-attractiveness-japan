@@ -7,7 +7,7 @@
 Kondo (2023)において提案した人流データから推定する地域魅力度指数を可視化しています。  
 URL: https://keisuke-kondo.shinyapps.io/regional-attractiveness-japan/
 
-[![COVID19 in Tokyo](www/regional-attractiveness-japan.png "Regional Attractiveness Index")](https://keisuke-kondo.shinyapps.io/regional-attractiveness-japan/)
+[![Regional Attractiveness Index](www/regional-attractiveness-japan.png "Regional Attractiveness Index")](https://keisuke-kondo.shinyapps.io/regional-attractiveness-japan/)
 
 ### 参考文献
 Kondo, K. (2023) "Measuring the Attractiveness of Trip Destinations: A Study of the Kansai Region," RIEB Discussion Paper Series No.2023-07  
