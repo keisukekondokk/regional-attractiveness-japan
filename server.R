@@ -21,129 +21,17 @@ server <- function(input, output, session) {
   #++++++++++++++++++++++++++++++++++++++
   
   #Leaflet Output
-  observeEvent(input$buttonMapUpdate, {
-    
-    #Progress Bar
-    withProgress(message = "地図を読込中...", value = 0, {
-      
-      #Popup
-      popup_yearmonth = as.character(format(input$listMapDate, format = "%Y-%m"))
-      
-      #Popup
-      if( input$listMapDay == 1 ){
-        popup_day = "平日"
-      } 
-      else if ( input$listMapDay == 2 ){
-        popup_day = "休日"
-      }
-      
-      #Popup
-      if( input$listMapGender == 0 ){
-        popup_gender = "総数"
-      } 
-      else if ( input$listMapGender == 1 ){
-        popup_gender = "男性"
-      }
-      else if ( input$listMapGender == 2 ){
-        popup_gender = "女性"
-      }
-      
-      #Popup
-      if( input$listMapAge == 0 ){
-        popup_age = "全体"
-      } 
-      else if ( input$listMapAge == 1 ){
-        popup_age = "15-39歳"
-      }
-      else if ( input$listMapAge == 2 ){
-        popup_age = "40-59歳"
-      }
-      else if ( input$listMapAge == 3 ){
-        popup_age = "60歳以上"
-      }
-      
-      #withProgress
-      incProgress(0.4, detail = "しばらくお待ちください。")
-      
-      #DataFrame Filtered 
-      dfDeltaMap <- dfDelta %>%
-        dplyr::filter(
-          year == lubridate::year(input$listMapDate) &
-            month == lubridate::month(input$listMapDate) &
-            day == input$listMapDay &
-            gender == input$listMapGender & 
-            age_group == input$listMapAge
-        )
-      
-      #withProgress
-      incProgress(0.4, detail = "しばらくお待ちください。")
-      
-      #Shapefiles
-      sfPolyLegend <- sfMuni %>%
-        dplyr::left_join(dfDeltaMap, by = c( "cityCode" = "code_pref_muni" )) %>%
-        dplyr::select(prefCode, prefName, cityCode, cityName, starts_with("b_delta"), pseudo_r2, obs_nonzero) %>%
-        dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaMap) - 1) ) %>%
-        dplyr::mutate(b_delta_total = if_else(b_delta_total > 0, NA_real_, b_delta_total)) %>%
-        dplyr::mutate(b_delta_color_group = cut(b_delta_total, breaks = breaks, labels = breaks_label)) %>%
-        dplyr::mutate(b_delta_color_group = as.character(b_delta_color_group)) %>%
-        dplyr::left_join(df_pal, by = c("b_delta_color_group" = "color_label"))%>%
-        dplyr::rename(b_delta_color_value = color_value) %>%
-        dplyr::mutate(b_delta_color_value = if_else(is.na(b_delta_color_value), "#E5E5E5", b_delta_color_value)) 
-      
-      #Leaflet Object
-      output$map1 <- renderLeaflet({
-        leaflet() %>%
-          #Tile Layer from Mapbox
-          addMapboxGL(
-            accessToken = accessToken,
-            style = styleUrl,
-            setView = FALSE
-          ) %>%
-          addPolygons(
-            data = sfPolyLegend,
-            fillColor = ~b_delta_color_value, 
-            fillOpacity = 0.5,
-            stroke = TRUE,
-            color = "#F0F0F0", 
-            weight = 0.5, 
-            popup = paste0(
-              "<b>年月: </b>　", popup_yearmonth, "<br>",
-              "<b>平日・休日: </b>　", popup_day, "<br>",
-              "<b>性別: </b>　", popup_gender, "<br>",
-              "<b>年齢層: </b>　", popup_age, "<br>",
-              "<b>市区町村コード: </b>　", sfPolyLegend$cityCode, "<br>",
-              "<b>市区町村名: </b>　", sfPolyLegend$prefName, sfPolyLegend$cityName, "<br>",
-              "<b>地域魅力度指数: </b>　", round(sfPolyLegend$b_delta_total, 3), "<br>",
-              "<b>全市区町村数に占める非ゼロフロー割合 (%): </b>　", round(sfPolyLegend$share_nonzero, 3), "<br>"
-            ),
-            label = paste0(sfPolyLegend$prefName, sfPolyLegend$cityName),
-            group = "地域魅力度指数"
-          ) %>%
-          addPolygons(
-            data = sfPref, 
-            fill = FALSE, 
-            color = "#303030", 
-            weight = 1.5, 
-            group = "都道府県境界"
-          ) %>%
-          addLegend(
-            colors = df_pal$color_value,
-            labels = df_pal$color_label,
-            title = "地域魅力度指数"
-          ) %>%
-          addLayersControl(
-            overlayGroups = c("地域魅力度指数", "都道府県境界"),
-            position = "topright",
-            options = layersControlOptions(collapsed = TRUE)
-          )      
-      })
-      
-      #withProgress
-      incProgress(0.2, detail = "しばらくお待ちください。")
-      
-    })
-  }, ignoreInit = FALSE, ignoreNULL = FALSE, once = TRUE)
-  
+  output$map1 <- renderLeaflet({
+    leaflet() %>%
+      #Tile Layer from Mapbox
+      addMapboxGL(
+        accessToken = accessToken,
+        style = styleUrl,
+        setView = FALSE
+      ) %>%
+      setView(137.50061532587793, 35.48748008188884, zoom = 5)
+  })
+
   #LeafletProxy
   map1_proxy <- leafletProxy("map1", session)
   
@@ -190,7 +78,7 @@ server <- function(input, output, session) {
       }
       
       #withProgress
-      incProgress(0.4, detail = "しばらくお待ちください。")
+      incProgress(0.4)
       
       #DataFrame Filtered 
       dfDeltaMap <- dfDelta %>%
@@ -215,7 +103,7 @@ server <- function(input, output, session) {
         dplyr::mutate(b_delta_color_value = if_else(is.na(b_delta_color_value), "#E5E5E5", b_delta_color_value)) 
 
       #withProgress
-      incProgress(0.4, detail = "しばらくお待ちください。")
+      incProgress(0.4)
       
       #Leaflet Object
       map1_proxy %>%
@@ -257,13 +145,13 @@ server <- function(input, output, session) {
           overlayGroups = c("地域魅力度指数", "都道府県境界"),
           position = "topright",
           options = layersControlOptions(collapsed = TRUE)
-        )
+        ) 
       
       #withProgress
-      incProgress(0.2, detail = "しばらくお待ちください。")
+      incProgress(0.2)
       
     })
-  }, ignoreInit = TRUE, ignoreNULL = FALSE)
+  }, ignoreInit = FALSE, ignoreNULL = FALSE)
   
   
   #++++++++++++++++++++++++++++++++++++++
@@ -325,7 +213,7 @@ server <- function(input, output, session) {
           gender == input$listLineGender & 
           age_group == input$listLineAge
       ) 
-    dfDeltaLineDay2Comp <-dfDeltaTemp %>%
+    dfDeltaLineDay2Comp <- dfDeltaTemp %>%
       dplyr::left_join(dfMuni, by = c("code_pref_muni" = "cityCode")) %>%
       dplyr::mutate(share_nonzero = 100 * obs_nonzero / (nrow(dfDeltaTemp) - 1)) %>%
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
