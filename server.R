@@ -126,7 +126,13 @@ server <- function(input, output, session) {
             "<b>地域魅力度指数: </b>　", round(sfPolyLegend$b_delta_total, 3), "<br>",
             "<b>全市区町村数に占める非ゼロフロー割合 (%): </b>　", round(sfPolyLegend$share_nonzero, 3), "<br>"
           ),
+          popupOptions = list(maxWidth = 500, closeOnClick = TRUE),
           label = paste0(sfPolyLegend$prefName, sfPolyLegend$cityName),
+          labelOptions = labelOptions(
+            style = list(
+              "font-size" = "large"
+            )
+          ),
           group = "地域魅力度指数"
         ) %>%
         addPolygons(
@@ -219,6 +225,10 @@ server <- function(input, output, session) {
       dplyr::mutate(time = paste0(year, "-", stringr::str_pad(month, 2, pad = "0"), "-01")) %>%
       dplyr::mutate(ts = as.Date(time, format = "%Y-%m-%d"))
       
+    #Filename
+    exportFileName <- paste0("tsline_", dfDeltaLineDay1Base$code_pref_muni[1], "_", dfDeltaLineDay1Base$prefName[1], dfDeltaLineDay1Base$cityName[1])
+    exportMenuItems <- c("downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "separator", "downloadCSV" )
+
     #Highcharts: Value
     output$line1 <- renderHighchart({
     
@@ -273,7 +283,14 @@ server <- function(input, output, session) {
         hc_tooltip(valueDecimals = 4,
                    pointFormat = "市区町村名: {point.series.name} <br> 地域魅力度指数: {point.y}") %>%
         hc_add_theme(hc_theme_flat()) %>%
-        hc_credits(enabled = TRUE)
+        hc_credits(enabled = TRUE) %>%
+        hc_exporting(
+          enabled = TRUE, 
+          sourceHeight = 500,
+          sourceWidth = 1000,
+          buttons = list(contextButton = list(menuItems = exportMenuItems)),
+          filename = paste0(exportFileName)
+        )
       
       #plot
       hc1
